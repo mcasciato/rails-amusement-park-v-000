@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   root 'static#welcome'
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
-  post '/signout' => 'sessions#destroy'
+  get '/logout' => 'sessions#destroy'
 end
