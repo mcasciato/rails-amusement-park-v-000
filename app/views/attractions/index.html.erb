@@ -1,13 +1,24 @@
-<h1>Attractions</h1>
-
-<ul>
-  <%= @attractions.each do |attraction| %>
-    <% if current_user.admin? %>
-      <li><%= link_to "Show " + attraction.name, attraction_path(attraction) %></li>
-    <% else %>
-      <li><%= link_to "Go On " + attraction.name, attraction_path(attraction) %></li>
-    <% end %>
+<h1>Listing attractions</h1>
+<table>
+  <tr>
+    <th>Picture</th>
+    <th>Name</th>
+    <th>Tickets</th>
+    <th>Details</th>
+  </tr>
+  <% @attractions.each do |attraction| %>
+  <tr align="center">
+      <td><%= image_tag("http://www.allthingsclipart.com/05/amusement.park.05.jpg", width: "100") %></td>
+      <td><%= attraction.name %></td>
+      <td><%= attraction.tickets %></td>
+      <% if current_user.admin %>
+        <td><%= link_to "Show #{attraction.name}", attraction_path(attraction) %></td>
+      <% else %>
+        <td><%= link_to "Go on #{attraction.name}", attraction_path(attraction) %></td>
+      <% end %>
+  </tr>
   <% end %>
-</ul>
-
-<h3><%= link_to "New Attraction", new_attraction_path %></h3>
+</table>
+<% if current_user.admin %>
+  <p><%= link_to "New Attraction", new_attraction_path %></p>
+<% end %>
